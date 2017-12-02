@@ -40,4 +40,4 @@ The plugin is pretty basic, you select a passage, select a tuning and apply. It 
 
 ## PS
 
-Many people say they can't tell the difference between tunings, and it is a subtle difference in the character of chords for the most part. To convince yourself that this plugin is working, I suggest applying the "Just" intonation (a particularily extreme tuning) to a passage of chordal music with chromatic harmony and notice how some (yymv) sounds beautifully concordant while the rest sounds hrribly out of tune.
+Many people say they can't tell the difference between tunings, and it is a subtle difference in the character of chords for the most part. To convince yourself that this plugin is working, I suggest applying the "Just" intonation (a particularily extreme tuning) to a passage of chordal music with chromatic harmony and notice how some (yymv) sounds beautifully concordant while the rest sounds horribly out of tune.
