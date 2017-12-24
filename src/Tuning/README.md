@@ -6,27 +6,28 @@ I've been intrigued for a while by the tuning Bach purportedly used for his WTC 
 
 ## Tunings and Temperaments Supported
 
-Supported tunings with a brief description, see the Pierre Lewis page above for an explaination of the descriptions `:-)`
+Supported tunings with a brief description, see the Pierre Lewis page above for an explaination of the descriptions `:-)`.
+But in brief, a cent is 1/100 of an equal-tempered semitone, a comma (or diatonic comma) is the difference between the C you started on and the B# you finish on when tuning in pure fiths (24 cents) and the syntonic comma is the difference between a pure third and the first third you reach when tuning in pure fifths (around 21.5 cents.)
 
 | Tuning | Description |
 | ------ | ----------- |
-| Equal | Each fifth is tempered 2 cents short of a pure fifth. equally distributing the comma |
-| Pythagore | Untempered pure fifths, the entire 24-cent comma is between Eb and G# |
-| Aaron | Each fifth is tempered 5.5 cents so that major thirds are pure, but resulting in a 36.5 cent "wolf" between Eb and G# |
-| Silberman | Compromise tempering each fifth by 1/6 of a syntonic comma (used by high Baroque organs) |
-| Salinas | A negative temperament (1/3 comma makes the major thirds slightly narrow) |
-| Kirnberger | Irregular temperamemt (different fifths tempered differently) means each key has a distinctive sound |
-| Vallotti | Another irregular temperament |
-| Werkmeister | Another, less symmetric irregular temperament |
-| Marpurg | Three fifths tempered by 8 cents and evenly distributed |
-| Just | "Just" intonation, near thirds and fifths are pure, at the expense of some intervals (and this tuning in general) being unusable |
-| Mean Semitone | like Aaron, but the remaining comma is distributed between B-F# and Bb-F (15.75 cents each) |
-| Grammateus | Hybrid Pythagorean tuning with the chromatic notes tempered |
-| French | Temperament Ordinaire, first fifths tuned wide of a pure fifth, later fifths narrowed to compensate |
-| French (2) | Similar to French |
-| Rameau | Similar to French |
-| Irregular Fr. 17e | Similar to French |
-| Bach/Lehman | see the Bradley Lehman link above |
+| Equal | Each fifth is tempered 2 cents short of a pure fifth. equally distributing the comma. |
+| Pythagore | Untempered pure fifths, the entire 24-cent comma is between Eb and G#. |
+| Aaron | Each fifth is tempered 5.5 cents so that major thirds are pure, but resulting in a 36.5 cent "wolf" between Eb and G#. |
+| Silberman | Compromise tempering each fifth by 1/6 of a syntonic comma. Used by high Baroque organs. |
+| Salinas | A negative temperament. 1/3 comma makes the major thirds slightly narrow. |
+| Kirnberger | an irregular temperamemt (different fifths tempered differently) means each key has a distinctive sound. |
+| Vallotti | Another irregular temperament. |
+| Werkmeister | Another, less symmetric irregular temperament. |
+| Marpurg | Three fifths tempered by 8 cents and evenly distributed. |
+| Just | "Just" intonation, An academic temperament. Near thirds and fifths are pure, at the expense of some intervals  being unusable. |
+| Mean Semitone | Like Aaron, but the remaining comma is distributed between B-F# and Bb-F (15.75 cents each.) |
+| Grammateus | Hybrid Pythagorean tuning with the chromatic notes tempered. |
+| French | Temperament Ordinaire, first fifths tuned wide of a pure fifth, later fifths narrowed to compensate. |
+| French (2) | Similar to French. |
+| Rameau | Similar to French. |
+| Irregular Fr. 17e | Similar to French. |
+| Bach/Lehman | Bach's own irregular temperament used for the 48 according to Lehman. See the Bradley Lehman link above. |
 
 ## Installation
 
@@ -44,4 +45,4 @@ I'd like to be able to rotate the tunings, so that the wolf can be put somewhere
 
 ## PS
 
-Many people say they can't tell the difference between tunings, and it is a subtle difference in the character of chords for the most part. To convince yourself that this plugin is working, I suggest applying the "Just" intonation (a particularily extreme tuning) to a passage of chordal music with chromatic harmony and notice how some (yymv) sounds beautifully concordant while the rest sounds horribly out of tune.
+Many people say they can't tell the difference between tunings, and it is a subtle difference in the character of chords for the most part. To convince yourself that it is working I suggest applying the "Just" intonation (a particularily extreme tuning) to a passage of chordal music with chromatic harmony and notice how some intervals sound very concordant while others are distinctly "out of tune".
