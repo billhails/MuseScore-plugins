@@ -38,6 +38,10 @@ Supported tunings with a brief description, see the Pierre Lewis page above for 
 
 The plugin is pretty basic, you select a passage, select a tuning and apply. It changes the tuning offset for every selected note appropriately. To reset, select everything and apply the "equal" tuning (equal temperament.)
 
+## To Do
+
+I'd like to be able to rotate the tunings, so that the wolf can be put somewhere appropriate for the piece in hand.
+
 ## PS
 
 Many people say they can't tell the difference between tunings, and it is a subtle difference in the character of chords for the most part. To convince yourself that this plugin is working, I suggest applying the "Just" intonation (a particularily extreme tuning) to a passage of chordal music with chromatic harmony and notice how some (yymv) sounds beautifully concordant while the rest sounds horribly out of tune.
