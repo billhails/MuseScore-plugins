@@ -32,11 +32,11 @@ Supported tunings with a brief description, see the Pierre Lewis page above for 
 
 * Copy the pluging to your `MuseScore2/Plugins` directory
 * start MuseScore
-* enable the plugin via `plugins > plugin manager`.
+* enable the plugin via `Plugins > Plugin Manager...`.
 
 ## Usage
 
-The plugin is pretty basic, you select a passage, select a tuning and apply. It changes the tuning offset for every selected note appropriately. To reset, select everything and apply the "equal" tuning (equal temperament.)
+Select a passage, then invoke the plugin via `Plugins > Playback > Tuning`, select a tuning and apply. It changes the tuning offset for every selected note appropriately. To reset, select everything and apply the "equal" tuning (equal temperament.)
 
 ## PS
 
