@@ -26,7 +26,8 @@ Supported tunings with a brief description, see the Pierre Lewis page above for 
 | French (2) | Similar to French |
 | Rameau | Similar to French |
 | Irregular Fr. 17e | Similar to French |
-| Bach/Lehman | see the Bradley Lehman link above |
+| Bach/Lehman 1722 | see the Bradley Lehman link above |
+| Bach/Lehman Chorale | see http://www-personal.umich.edu/~bpl/larips/vocal.html |
 
 ## Installation
 

@@ -141,7 +141,9 @@ MuseScore {
     property var french2: [ 000.0, 696.5, 193.0, 889.5, 386.0, 1082.5, 581.8, 81.0, 783.0, 289.5, 996.5, 503.5 ];
     property var rameau: [ 000.0, 696.5, 193.0, 889.5, 386.0, 1082.5, 584.5, 86.5, 788.5, 298.0, 1007.0, 503.5 ];
     property var irrFr17e: [ 000.0, 697.0, 194.0, 891.0, 388.0, 1085.0, 582.0, 79.0, 776.0, 292.0, 998.0, 503.0 ];
-    property var bachLehman: [ 000.0, 698.0, 196.1, 894.1, 392.2, 1094.1, 596.1, 98.0, 798.0, 298.0, 998.0, 502.0 ];
+    /*                                  C      G      D      A      E       B      F#     C#     G#     Eb      Bb     F     */
+    property var bachLehman:        [ 005.9, 703.9, 202.0, 900.0, 398.0, 1100.0, 602.0, 103.9, 803.9, 303.9, 1003.9, 507.8 ];
+    property var bachLehmanChorale: [ 000.0, 703.9, 202.0, 900.0, 398.1, 1096.1, 594.1,  96.1, 798.1, 300.0, 1000.0, 500.0 ];
 
     property var chosenTemperament: [];
 
@@ -292,10 +294,18 @@ MuseScore {
                     }
 
                     RadioButton {
-                        text: "Bach/Lehman"
+                        text: "Bach/Lehman 1722"
                         exclusiveGroup: tempamentTypeGroup
                         onClicked: {
                             chosenTemperament = bachLehman
+                        }
+                    }
+
+                    RadioButton {
+                        text: "Bach/Lehman Chorale"
+                        exclusiveGroup: tempamentTypeGroup
+                        onClicked: {
+                            chosenTemperament = bachLehmanChorale
                         }
                     }
                 }
