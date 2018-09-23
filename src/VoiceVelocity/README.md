@@ -10,7 +10,7 @@ That does not allow the control of the dynamics of a single voice within a part,
 * Re-start MuseScore.
 * Go to Plugins > Plugin Manager and tick the box next to voice-velocity.
 
-# Running
+## Running
 * Select a passage of music within a single stave with multiple voices.
 * Select Plugins > Playback > Voice Velocity to start the plugin.
 * Choose an offset. Negative values make the voice quieter, positive values louder.
