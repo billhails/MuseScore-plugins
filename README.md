@@ -9,3 +9,6 @@ Given two keys, displays the chords those keys have in common.
 
 ## Tuning
 Alters the tuning of the selection to one of a number of alternatives.
+
+## Voice Velocity
+Allows you to change the velocity (dynamics) of a single voice part.
