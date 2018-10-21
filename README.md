@@ -2,7 +2,7 @@
 Various MuseScore2 plugins that people might find useful.
 
 ## Mirror Intervals
-Chromatically mirror intervals about a pivot note while attempting to keep SAT and B in their original registers.
+Chromatically mirror intervals about a pivot note while attempting to keep S, A, T and B in their original registers.
 
 ## Pivot Chords
 Given two keys, displays the chords those keys have in common.
