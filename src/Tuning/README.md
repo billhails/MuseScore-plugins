@@ -4,6 +4,8 @@ I've written a plugin (tested with MuseScore 2.1.0) that others may find useful.
 
 I've been intrigued for a while by the tuning Bach purportedly used for his WTC according to Bradley Lehman [Website Here](http://www.larips.com) and initially set out to just do that, however I found a great resource on other tunings by Pierre Lewis [Here](http://leware.net/temper/temper.htm) and went ahead and added all of those too.
 
+![Tuning Pop Up](https://raw.githubusercontent.com/billhails/MuseScore-plugins/develop/images/Tuning.png)
+
 ## Tunings and Temperaments Supported
 
 Supported tunings with a brief description, see the Pierre Lewis page above for an explaination of the descriptions `:-)`
