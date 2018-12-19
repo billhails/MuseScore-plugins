@@ -27,7 +27,7 @@ MuseScore {
     description: "Converts between tuning systems"
     pluginType: "dialog"
     width: 250
-    height: 550
+    height: 650
 
     onRun: {
         if (!curScore) {
@@ -35,6 +35,7 @@ MuseScore {
             Qt.quit()
         }
         chosenTemperament = equal;
+        chosenRoot = 0;
     }
 
     function applyTemperament()
@@ -144,12 +145,13 @@ MuseScore {
     property var bachLehman: [ 000.0, 698.0, 196.1, 894.1, 392.2, 1094.1, 596.1, 98.0, 798.0, 298.0, 998.0, 502.0 ];
 
     property var chosenTemperament: [];
+    property var chosenRoot: 0;
 
     /**
      * map a note (pitch modulo 12) to a value in one of the above tables
      */
     function lookUp(note, table) {
-        return table[(note * 7) % 12];
+        return table[((note * 7) - chosenRoot + 12) % 12];
     }
 
     /**
@@ -165,7 +167,7 @@ MuseScore {
     Rectangle {
         color: "lightgrey"
         anchors.fill: parent
-
+ 
         GridLayout {
             columns: 2
             anchors.fill: parent
@@ -296,6 +298,103 @@ MuseScore {
                         exclusiveGroup: tempamentTypeGroup
                         onClicked: {
                             chosenTemperament = bachLehman
+                        }
+                    }
+                }
+            }
+            GroupBox {
+                Layout.columnSpan: 2
+                anchors.left: parent.left
+                anchors.right: parent.right
+                title: "Root Note"
+                GridLayout {
+                    columns: 4
+                    anchors.fill: parent
+                    anchors.margins: 10
+                    ExclusiveGroup { id: rootNoteGroup }
+                    RadioButton {
+                        text: "C"
+                        checked: true
+                        exclusiveGroup: rootNoteGroup
+                        onClicked: {
+                            chosenRoot = 0
+                        }
+                    }
+                    RadioButton {
+                        text: "G"
+                        exclusiveGroup: rootNoteGroup
+                        onClicked: {
+                            chosenRoot = 1
+                        }
+                    }
+                    RadioButton {
+                        text: "D"
+                        exclusiveGroup: rootNoteGroup
+                        onClicked: {
+                            chosenRoot = 2
+                        }
+                    }
+                    RadioButton {
+                        text: "A"
+                        exclusiveGroup: rootNoteGroup
+                        onClicked: {
+                            chosenRoot = 3
+                        }
+                    }
+                    RadioButton {
+                        text: "E"
+                        exclusiveGroup: rootNoteGroup
+                        onClicked: {
+                            chosenRoot = 4
+                        }
+                    }
+                    RadioButton {
+                        text: "B"
+                        exclusiveGroup: rootNoteGroup
+                        onClicked: {
+                            chosenRoot = 5
+                        }
+                    }
+                    RadioButton {
+                        text: "F#"
+                        exclusiveGroup: rootNoteGroup
+                        onClicked: {
+                            chosenRoot = 6
+                        }
+                    }
+                    RadioButton {
+                        text: "C#"
+                        exclusiveGroup: rootNoteGroup
+                        onClicked: {
+                            chosenRoot = 7
+                        }
+                    }
+                    RadioButton {
+                        text: "G#"
+                        exclusiveGroup: rootNoteGroup
+                        onClicked: {
+                            chosenRoot = 8
+                        }
+                    }
+                    RadioButton {
+                        text: "Eb"
+                        exclusiveGroup: rootNoteGroup
+                        onClicked: {
+                            chosenRoot = 9
+                        }
+                    }
+                    RadioButton {
+                        text: "Bb"
+                        exclusiveGroup: rootNoteGroup
+                        onClicked: {
+                            chosenRoot = 10
+                        }
+                    }
+                    RadioButton {
+                        text: "F"
+                        exclusiveGroup: rootNoteGroup
+                        onClicked: {
+                            chosenRoot = 11
                         }
                     }
                 }
