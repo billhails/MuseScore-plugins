@@ -4,6 +4,8 @@ I've written a plugin (tested with MuseScore 2.1.0) that others may find useful.
 
 I've been intrigued for a while by the tuning Bach purportedly used for his WTC according to Bradley Lehman [Website Here](http://www.larips.com) and initially set out to just do that, however I found a great resource on other tunings by Pierre Lewis [Here](http://leware.net/temper/temper.htm) and went ahead and added all of those too.
 
+![Tuning Pop Up](https://raw.githubusercontent.com/billhails/MuseScore-plugins/develop/images/Tuning.png)
+
 ## Tunings and Temperaments Supported
 
 Supported tunings with a brief description, see the Pierre Lewis page above for an explaination of the descriptions `:-)`.
@@ -33,11 +35,13 @@ But in brief, a cent is 1/100 of an equal-tempered semitone, a comma (or diatoni
 
 * Copy the pluging to your `MuseScore2/Plugins` directory
 * start MuseScore
-* enable the plugin via `plugins > plugin manager`.
+* enable the plugin via `Plugins > Plugin Manager...`.
 
 ## Usage
 
-The plugin is pretty basic, you select a passage, select a tuning and apply. It changes the tuning offset for every selected note appropriately. To reset, select everything and apply the "equal" tuning (equal temperament.)
+Select a passage, then invoke the plugin via `Plugins > Playback > Tuning`, select a tuning and apply. It changes the tuning offset for every selected note appropriately. To reset, select everything and apply the "equal" tuning (equal temperament.)
+
+New in this release, you can now select a root note other than C on which the tuning will be centered.
 
 ## To Do
 
