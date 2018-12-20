@@ -2,13 +2,19 @@
 
 I've written a plugin (tested with MuseScore 2.1.0) that others may find useful.
 
-I've been intrigued for a while by the tuning Bach purportedly used for his WTC according to Bradley Lehman [Website Here](http://www.larips.com) and initially set out to just do that, however I found a great resource on other tunings by Pierre Lewis [Here](http://leware.net/temper/temper.htm) and went ahead and added all of those too.
+I've been intrigued for a while by the tuning Bach purportedly used
+for his WTC according to Bradley Lehman [Website Here](http://www.larips.com)
+and initially set out to just do that,
+however I found a great resource on other tunings by Pierre Lewis
+[Here](http://leware.net/temper/temper.htm) and went ahead and added
+all of those too.
 
 ![Tuning Pop Up](https://raw.githubusercontent.com/billhails/MuseScore-plugins/develop/images/Tuning.png)
 
 ## Tunings and Temperaments Supported
 
-Supported tunings with a brief description, see the Pierre Lewis page above for an explaination of the descriptions `:-)`
+Supported tunings with a brief description, see the Pierre Lewis
+page above for an explaination of the descriptions `:-)`
 
 | Tuning | Description |
 | ------ | ----------- |
@@ -38,10 +44,44 @@ Supported tunings with a brief description, see the Pierre Lewis page above for 
 
 ## Usage
 
-Select a passage, then invoke the plugin via `Plugins > Playback > Tuning`, select a tuning and apply. It changes the tuning offset for every selected note appropriately. To reset, select everything and apply the "equal" tuning (equal temperament.)
+Select a passage, then invoke the plugin via `Plugins > Playback >
+Tuning`, select a tuning and apply. It changes the tuning offset
+for every selected note appropriately. To reset, select everything
+and apply the "equal" tuning (equal temperament.)
 
-New in this release, you can now select a root note other than C on which the tuning will be centered.
+You can make the following adjustments to the tuning, before applying
+it:
+
+### Root Note
+
+Allows you to choose a different root note to center the tuning on.
+This has the effect of rotating the tuning around the cycle of
+fifths. For example suppose in a particular tuning, the interval
+from C to G is a pure fifth while the interval G to D is slightly
+wide. If you select G as the root note, then the interval from G
+to D will be a pure fifth, and the interval from D to A will be
+slightly wide, and so on for all the other intervals.
+
+This basically allows you to make certain tunings more usable in
+remote keys.
+
+### Pure Tone
+
+Adjusts each note by a constant amount so that the chosen pure tone
+is tuned to its "correct" equal tempered pitch, while maintaining
+the relationships of the tuning. This is occasionally necessary to
+correctly reproduce a desired tuning exactly.
+
+Note that when you change the Root Note above, the Pure Tone also
+changes to the same note. This is usually what you want, but you
+can subsequently adjust the Pure Tone separately if needed.
 
 ## PS
 
-Many people say they can't tell the difference between tunings, and it is a subtle difference in the character of chords for the most part. To convince yourself that this plugin is working, I suggest applying the "Just" intonation (a particularily extreme tuning) to a passage of chordal music with chromatic harmony and notice how some (yymv) sounds beautifully concordant while the rest sounds horribly out of tune.
+Many people say they can't tell the difference between tunings, and
+it is a subtle difference in the character of chords for the most
+part. To convince yourself that this plugin is working, I suggest
+applying the "Just" intonation (a particularily extreme tuning) to
+a passage of chordal music with chromatic harmony and notice how
+some sounds concordant while the rest sounds distinctly "out of
+tune".

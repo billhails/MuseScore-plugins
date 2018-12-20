@@ -22,12 +22,12 @@ import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.1
 
 MuseScore {
-    version: "1.1.1"
+    version: "1.2.0"
     menuPath: "Plugins.Playback.Tuning"
     description: "Converts between tuning systems"
     pluginType: "dialog"
-    width: 250
-    height: 650
+    width: 450
+    height: 500
 
     /**
      * See http://leware.net/temper/temper.htm and specifically http://leware.net/temper/cents.htm
@@ -59,6 +59,7 @@ MuseScore {
 
     property var chosenTemperament: equal;
     property var chosenRoot: 0;
+    property var chosenPureTone: 0;
 
     onRun: {
         if (!curScore) {
@@ -147,11 +148,14 @@ MuseScore {
 
     /**
      * map a note (pitch modulo 12) to a value in one of the above tables
+     * then adjust for the choice of pure note.
      */
     function lookUp(note, table) {
         var i = ((note * 7) - chosenRoot + 12) % 12;
         var offset = table[i];
-        return offset;
+        var j = (chosenPureTone - chosenRoot + 12) % 12;
+        var pureNoteAdjustment = table[j];
+        return offset - pureNoteAdjustment;
     }
 
     /**
@@ -173,9 +177,6 @@ MuseScore {
             anchors.fill: parent
             anchors.margins: 10
             GroupBox {
-                Layout.columnSpan: 2
-                anchors.left: parent.left
-                anchors.right: parent.right
                 title: "Temperament"
                 ColumnLayout {
                     ExclusiveGroup { id: tempamentTypeGroup }
@@ -302,116 +303,250 @@ MuseScore {
                     }
                 }
             }
-            GroupBox {
-                Layout.columnSpan: 2
-                anchors.left: parent.left
-                anchors.right: parent.right
-                title: "Root Note"
-                GridLayout {
-                    columns: 4
-                    anchors.fill: parent
-                    anchors.margins: 10
-                    ExclusiveGroup { id: rootNoteGroup }
-                    RadioButton {
-                        text: "C"
-                        checked: true
-                        exclusiveGroup: rootNoteGroup
-                        onClicked: {
-                            chosenRoot = 0
+
+            ColumnLayout {
+                GroupBox {
+                    title: "Root Note"
+                    GridLayout {
+                        columns: 4
+                        anchors.fill: parent
+                        anchors.margins: 10
+                        ExclusiveGroup { id: rootNoteGroup }
+                        RadioButton {
+                            text: "C"
+                            checked: true
+                            exclusiveGroup: rootNoteGroup
+                            onClicked: {
+                                chosenRoot = 0;
+                                chosenPureTone = 0;
+                                pure_c.checked = true
+                            }
                         }
-                    }
-                    RadioButton {
-                        text: "G"
-                        exclusiveGroup: rootNoteGroup
-                        onClicked: {
-                            chosenRoot = 1
+                        RadioButton {
+                            text: "G"
+                            exclusiveGroup: rootNoteGroup
+                            onClicked: {
+                                chosenRoot = 1;
+                                chosenPureTone = 1;
+                                pure_g.checked = true
+                            }
                         }
-                    }
-                    RadioButton {
-                        text: "D"
-                        exclusiveGroup: rootNoteGroup
-                        onClicked: {
-                            chosenRoot = 2
+                        RadioButton {
+                            text: "D"
+                            exclusiveGroup: rootNoteGroup
+                            onClicked: {
+                                chosenRoot = 2;
+                                chosenPureTone = 2;
+                                pure_d.checked = true
+                            }
                         }
-                    }
-                    RadioButton {
-                        text: "A"
-                        exclusiveGroup: rootNoteGroup
-                        onClicked: {
-                            chosenRoot = 3
+                        RadioButton {
+                            text: "A"
+                            exclusiveGroup: rootNoteGroup
+                            onClicked: {
+                                chosenRoot = 3;
+                                chosenPureTone = 3;
+                                pure_d.checked = true
+                            }
                         }
-                    }
-                    RadioButton {
-                        text: "E"
-                        exclusiveGroup: rootNoteGroup
-                        onClicked: {
-                            chosenRoot = 4
+                        RadioButton {
+                            text: "E"
+                            exclusiveGroup: rootNoteGroup
+                            onClicked: {
+                                chosenRoot = 4;
+                                chosenPureTone = 4;
+                                pure_e.checked = true
+                            }
                         }
-                    }
-                    RadioButton {
-                        text: "B"
-                        exclusiveGroup: rootNoteGroup
-                        onClicked: {
-                            chosenRoot = 5
+                        RadioButton {
+                            text: "B"
+                            exclusiveGroup: rootNoteGroup
+                            onClicked: {
+                                chosenRoot = 5;
+                                chosenPureTone = 5;
+                                pure_b.checked = true
+                            }
                         }
-                    }
-                    RadioButton {
-                        text: "F#"
-                        exclusiveGroup: rootNoteGroup
-                        onClicked: {
-                            chosenRoot = 6
+                        RadioButton {
+                            text: "F#"
+                            exclusiveGroup: rootNoteGroup
+                            onClicked: {
+                                chosenRoot = 6;
+                                chosenPureTone = 6;
+                                pure_f_sharp.checked = true
+                            }
                         }
-                    }
-                    RadioButton {
-                        text: "C#"
-                        exclusiveGroup: rootNoteGroup
-                        onClicked: {
-                            chosenRoot = 7
+                        RadioButton {
+                            text: "C#"
+                            exclusiveGroup: rootNoteGroup
+                            onClicked: {
+                                chosenRoot = 7;
+                                chosenPureTone = 7;
+                                pure_c_sharp.checked = true
+                            }
                         }
-                    }
-                    RadioButton {
-                        text: "G#"
-                        exclusiveGroup: rootNoteGroup
-                        onClicked: {
-                            chosenRoot = 8
+                        RadioButton {
+                            text: "G#"
+                            exclusiveGroup: rootNoteGroup
+                            onClicked: {
+                                chosenRoot = 8;
+                                chosenPureTone = 8;
+                                pure_g_sharp.checked = true
+                            }
                         }
-                    }
-                    RadioButton {
-                        text: "Eb"
-                        exclusiveGroup: rootNoteGroup
-                        onClicked: {
-                            chosenRoot = 9
+                        RadioButton {
+                            text: "Eb"
+                            exclusiveGroup: rootNoteGroup
+                            onClicked: {
+                                chosenRoot = 9;
+                                chosenPureTone = 9;
+                                pure_e_flat.checked = true
+                            }
                         }
-                    }
-                    RadioButton {
-                        text: "Bb"
-                        exclusiveGroup: rootNoteGroup
-                        onClicked: {
-                            chosenRoot = 10
+                        RadioButton {
+                            text: "Bb"
+                            exclusiveGroup: rootNoteGroup
+                            onClicked: {
+                                chosenRoot = 10;
+                                chosenPureTone = 10;
+                                pure_b_flat.checked = true
+                            }
                         }
-                    }
-                    RadioButton {
-                        text: "F"
-                        exclusiveGroup: rootNoteGroup
-                        onClicked: {
-                            chosenRoot = 11
+                        RadioButton {
+                            text: "F"
+                            exclusiveGroup: rootNoteGroup
+                            onClicked: {
+                                chosenRoot = 11;
+                                chosenPureTone = 11;
+                                pure_f.checked = true
+                            }
                         }
                     }
                 }
-            }
-            Button {
-                id: applyButton
-                text: qsTranslate("PrefsDialogBase", "Apply")
-                onClicked: {
-                    applyTemperament()
-                    Qt.quit()
+
+                GroupBox {
+                    title: "Pure Tone"
+                    GridLayout {
+                        columns: 4
+                        anchors.fill: parent
+                        anchors.margins: 10
+                        ExclusiveGroup { id: pureNoteGroup }
+                        RadioButton {
+                            text: "C"
+                            checked: true
+                            id: pure_c
+                            exclusiveGroup: pureNoteGroup
+                            onClicked: {
+                                chosenPureTone = 0
+                            }
+                        }
+                        RadioButton {
+                            text: "G"
+                            id: pure_g
+                            exclusiveGroup: pureNoteGroup
+                            onClicked: {
+                                chosenPureTone = 1
+                            }
+                        }
+                        RadioButton {
+                            text: "D"
+                            id: pure_d
+                            exclusiveGroup: pureNoteGroup
+                            onClicked: {
+                                chosenPureTone = 2
+                            }
+                        }
+                        RadioButton {
+                            text: "A"
+                            id: pure_a
+                            exclusiveGroup: pureNoteGroup
+                            onClicked: {
+                                chosenPureTone = 3
+                            }
+                        }
+                        RadioButton {
+                            text: "E"
+                            id: pure_e
+                            exclusiveGroup: pureNoteGroup
+                            onClicked: {
+                                chosenPureTone = 4
+                            }
+                        }
+                        RadioButton {
+                            text: "B"
+                            id: pure_b
+                            exclusiveGroup: pureNoteGroup
+                            onClicked: {
+                                chosenPureTone = 5
+                            }
+                        }
+                        RadioButton {
+                            text: "F#"
+                            id: pure_f_sharp
+                            exclusiveGroup: pureNoteGroup
+                            onClicked: {
+                                chosenPureTone = 6
+                            }
+                        }
+                        RadioButton {
+                            text: "C#"
+                            id: pure_c_sharp
+                            exclusiveGroup: pureNoteGroup
+                            onClicked: {
+                                chosenPureTone = 7
+                            }
+                        }
+                        RadioButton {
+                            text: "G#"
+                            id: pure_g_sharp
+                            exclusiveGroup: pureNoteGroup
+                            onClicked: {
+                                chosenPureTone = 8
+                            }
+                        }
+                        RadioButton {
+                            text: "Eb"
+                            id: pure_e_flat
+                            exclusiveGroup: pureNoteGroup
+                            onClicked: {
+                                chosenPureTone = 9
+                            }
+                        }
+                        RadioButton {
+                            text: "Bb"
+                            id: pure_b_flat
+                            exclusiveGroup: pureNoteGroup
+                            onClicked: {
+                                chosenPureTone = 10
+                            }
+                        }
+                        RadioButton {
+                            text: "F"
+                            id: pure_f
+                            exclusiveGroup: pureNoteGroup
+                            onClicked: {
+                                chosenPureTone = 11
+                            }
+                        }
+                    }
                 }
-            }
-            Button {
-                id: cancelButton
-                text: qsTranslate("PrefsDialogBase", "Cancel")
-                onClicked: {
-                    Qt.quit()
+
+                RowLayout {
+                    Button {
+                        id: applyButton
+                        text: qsTranslate("PrefsDialogBase", "Apply")
+                        onClicked: {
+                            applyTemperament()
+                            Qt.quit()
+                        }
+                    }
+                    Button {
+                        id: cancelButton
+                        text: qsTranslate("PrefsDialogBase", "Cancel")
+                        onClicked: {
+                            Qt.quit()
+                        }
+                    }
                 }
             }
         }
