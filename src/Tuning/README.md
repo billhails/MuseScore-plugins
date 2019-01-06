@@ -47,12 +47,14 @@ third you reach when tuning in pure fifths (around 21.5 cents.)
 * start MuseScore
 * enable the plugin via `Plugins > Plugin Manager...`.
 
-## Usage
+## Basic Usage
 
 Select a passage, then invoke the plugin via `Plugins > Playback >
 Tuning`, select a tuning and apply. It changes the tuning offset
 for every selected note appropriately. To reset, select everything
 and apply the "equal" tuning (equal temperament.)
+
+## Advanced Usage
 
 You can make the following adjustments to the tuning, before applying
 it:
@@ -70,6 +72,9 @@ slightly wide, and so on for all the other intervals.
 This basically allows you to make certain tunings more usable in
 remote keys.
 
+Note that certain tunings, such as the Pythagorean, already specify
+a root note other than C.
+
 ### Pure Tone
 
 Adjusts each note by a constant amount so that the chosen pure tone
@@ -80,3 +85,41 @@ correctly reproduce a desired tuning exactly.
 Note that when you change the Root Note above, the Pure Tone also
 changes to the same note. This is usually what you want, but you
 can subsequently adjust the Pure Tone separately if needed.
+
+Also note that certain preset tunings already have a pure tone
+other than C, to properly represent the correct tuning. Again
+you can override this choice if needed.
+
+### Final Values
+
+Allows you to directly edit all the offsets that will be applied.
+
+### Advanced Controls
+
+#### Save
+
+Will prompt for a filename and save the current settings. I'd
+recomment creating a directory called `tunings` under your `Plugins`
+directory, but you can put them where you like. The file is text,
+in JSON format, so you can share your tunings with others or save
+them for later re-use.
+
+#### Load
+
+Loads a file previously saved above.
+
+#### Undo
+
+Undoes the last change. There is a hstory limit of 30.
+
+#### Redo
+
+Redoes a previous undo, where possible.
+
+### Apply and Cancel
+
+If you have made customisations to a tuning, and you hit "Apply"
+or "Cancel", you will be asked to confirm that you want the plugin to
+quit. You would be quite annoyed if you spent time entering a set
+of offsets manually, hit apply to try them out, and the plugin
+discarded them.
