@@ -45,7 +45,7 @@ third you reach when tuning in pure fifths (around 21.5 cents.)
 
 * Choose either the `2.x/tuning.qml` or `3.x/tuning.qml` file.
 * Click the "raw" button.
-* Or choose one of these links: [2.x](https://raw.githubusercontent.com/billhails/MuseScore-plugins/develop/src/Tuning/2.x/tuning.qml) or [3.x](https://raw.githubusercontent.com/billhails/MuseScore-plugins/develop/src/Tuning/3.x/tuning.qml).
+* Or choose one of these links: [2.x](https://raw.githubusercontent.com/billhails/MuseScore-plugins/master/src/Tuning/2.x/tuning.qml) or [3.x](https://raw.githubusercontent.com/billhails/MuseScore-plugins/master/src/Tuning/3.x/tuning.qml).
 * In your browser do "Save as" and make sure there's no `.txt` extension.
 * Save the plugin to your `MuseScore2/Plugins` or `MuseScore3/Plugins` directory as appropriate.
 * start MuseScore
