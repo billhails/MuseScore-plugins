@@ -21,7 +21,6 @@ import QtQuick.Controls.Styles 1.3
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.1
 import FileIO 1.0
-import "command.js" as Command
 
 MuseScore {
     version: "2.3.2"
@@ -169,7 +168,7 @@ MuseScore {
 
     function getHistory() {
         if (history == 0) {
-            history = new Command.History()
+            history = new commandHistory()
         }
         return history
     }
@@ -1296,6 +1295,86 @@ MuseScore {
             saveDialog.visible = false
         }
         visible: false
+    }
+
+    // Command pattern for undo/redo
+    function commandHistory() {
+        function Command(undo_fn, redo_fn, label) {
+            this.undo = undo_fn
+            this.redo = redo_fn
+            this.label = label // for debugging
+        }
+
+        var history = []
+        var index = -1
+        var transaction = 0
+        var maxHistory = 30
+
+        function newHistory(commands) {
+            if (index < maxHistory) {
+                index++
+                history = history.slice(0, index)
+            } else {
+                history = history.slice(1, index)
+            }
+            history.push(commands)
+        }
+
+        this.add = function(undo, redo, label) {
+            var command = new Command(undo, redo, label)
+            console.log("history add command " + label)
+            command.redo()
+            if (transaction) {
+                history[index].push(command)
+            } else {
+                newHistory([command])
+            }
+        }
+
+        this.undo = function() {
+            if (index != -1) {
+                console.log("history begin undo [" + index + "]")
+                history[index].slice().reverse().forEach(
+                    function(command) {
+                        console.log("history undo " + command.label)
+                        command.undo()
+                    }
+                )
+                console.log("history end undo [" + index + "]")
+                index--
+            }
+        }
+
+        this.redo = function() {
+            if ((index + 1) < history.length) {
+                index++
+                console.log("history begin redo [" + index + "]")
+                history[index].forEach(
+                    function(command) {
+                        console.log("history redo " + command.label)
+                        command.redo()
+                    }
+                )
+                console.log("history end redo [" + index + "]")
+            }
+        }
+
+        this.begin = function() {
+            if (transaction) {
+                throw new Error("already in transaction")
+            }
+            console.log("history begin transaction [" + (index + 1) + "]")
+            newHistory([])
+            transaction = 1
+        }
+
+        this.end = function() {
+            if (!transaction) {
+                throw new Error("not in transaction")
+            }
+            console.log("history end transaction [" + index + "]")
+            transaction = 0
+        }
     }
 
 }
