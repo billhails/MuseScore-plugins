@@ -1,6 +1,6 @@
 # Tuning
 
-I've written a plugin (tested with MuseScore 2.1.0) that others may find useful.
+I've written a plugin (tested with MuseScore 2.1.0 and 3.0.2) that others may find useful.
 
 I've been intrigued for a while by the tuning Bach purportedly used
 for his WTC according to Bradley Lehman [Website Here](http://www.larips.com)
@@ -43,7 +43,11 @@ third you reach when tuning in pure fifths (around 21.5 cents.)
 
 ## Installation
 
-* Copy the pluging to your `MuseScore2/Plugins` directory
+* Choose either the `2.x/tuning.qml` or `3.x/tuning.qml` file.
+* Click the "raw" button.
+* Or choose one of these links: [2.x](https://raw.githubusercontent.com/billhails/MuseScore-plugins/master/src/Tuning/2.x/tuning.qml) or [3.x](https://raw.githubusercontent.com/billhails/MuseScore-plugins/master/src/Tuning/3.x/tuning.qml).
+* In your browser do "Save as" and make sure there's no `.txt` extension.
+* Save the plugin to your `MuseScore2/Plugins` or `MuseScore3/Plugins` directory as appropriate.
 * start MuseScore
 * enable the plugin via `Plugins > Plugin Manager...`.
 
@@ -114,7 +118,16 @@ Undoes the last change. There is a hstory limit of 30.
 
 #### Redo
 
-Redoes a previous undo, where possible.
+Redo a previous undo, where possible.
+
+### Caveats
+
+The controls are applied strictly top to bottom and left to right.
+This means that making a change in any of the controls will override
+any changes below and to the right of that control, so for example
+if you manually edit the Pure Tone value then select a different
+Root Note your Pure Tone change will be lost. You can use the
+Undo button to revert that change however.
 
 ### Apply and Cancel
 
