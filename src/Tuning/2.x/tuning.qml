@@ -57,103 +57,103 @@ MuseScore {
         'root': 0,
         'pure': 0,
         'name': "equal"
-    };
+    }
     property var pythagorean: {
         'offsets': [-6.0, -4.0, -2.0, 0.0, 2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0],
         'root': 9,
         'pure': 3,
         'name': "pythagorean"
-    };
+    }
     property var aaron: {
         'offsets': [10.5, 7.0, 3.5, 0.0, -3.5, -7.0, -10.5, -14.0, -17.5, -21.0, -24.5, -28.0],
         'root': 9,
         'pure': 3,
         'name': "aaron"
-    };
+    }
     property var silberman: {
         'offsets': [5.0, 3.3, 1.7, 0.0, -1.7, -3.3, -5.0, -6.7, -8.3, -10.0, -11.7, -13.3],
         'root': 9,
         'pure': 3,
         'name': "silberman"
-    };
+    }
     property var salinas: {
         'offsets': [16.0, 10.7, 5.3, 0.0, -5.3, -10.7, -16.0, -21.3, -26.7, -32.0, -37.3, -42.7],
         'root': 9,
         'pure': 3,
         'name': "salinas"
-    };
+    }
     property var kirnberger: {
         'offsets': [0.0, -3.5, -7.0, -10.5, -14.0, -12.0, -10.0, -10.0, -8.0, -6.0, -4.0, -2.0],
         'root': 0,
         'pure': 0,
         'name': "kirnberger"
-    };
+    }
     property var vallotti: {
         'offsets': [0.0, -2.0, -4.0, -6.0, -8.0, -10.0, -8.0, -6.0, -4.0, -2.0, 0.0, 2.0],
         'root': 0,
         'pure': 0,
         'name': "vallotti"
-    };
+    }
     property var werkmeister: {
         'offsets': [0.0, -4.0, -8.0, -12.0, -10.0, -8.0, -12.0, -10.0, -8.0, -6.0, -4.0, -2.0],
         'root': 0,
         'pure': 0,
         'name': "werkmeister"
-    };
+    }
     property var marpurg: {
         'offsets': [0.0, 2.0, 4.0, 6.0, 0.0, 2.0, 4.0, 6.0, 0.0, 2.0, 4.0, 6.0],
         'root': 0,
         'pure': 0,
         'name': "marpurg"
-    };
+    }
     property var just: {
         'offsets': [0.0, 2.0, 4.0, -16.0, -14.0, -12.0, -10.0, -30.0, -28.0, 16.0, 18.0, -2.0],
         'root': 0,
         'pure': 0,
         'name': "just"
-    };
+    }
     property var meanSemitone: {
         'offsets': [0.0, -3.5, -7.0, -10.5, -14.0, 3.5, 0.0, -3.5, -7.0, -10.5, -14.0, -17.5],
         'root': 6,
         'pure': 6,
         'name': "meanSemitone"
-    };
+    }
     property var grammateus: {
         'offsets': [-2.0, 0.0, 2.0, 4.0, 6.0, 8.0, 10.0, 0.0, 2.0, 4.0, 6.0, 8.0],
         'root': 11,
         'pure': 1,
         'name': "grammateus"
-    };
+    }
     property var french: {
         'offsets': [0.0, -2.5, -5.0, -7.5, -10.0, -12.5, -13.0, -13.0, -11.0, -6.0, -1.5, 2.5],
         'root': 0,
         'pure': 0,
         'name': "french"
-    };
+    }
     property var french2: {
         'offsets': [0.0, -3.5, -7.0, -10.5, -14.0, -17.5, -18.2, -19.0, -17.0, -10.5, -3.5, 3.5],
         'root': 0,
         'pure': 0,
         'name': "french2"
-    };
+    }
     property var rameau: {
         'offsets': [0.0, -3.5, -7.0, -10.5, -14.0, -17.5, -15.5, -13.5, -11.5, -2.0, 7.0, 3.5],
         'root': 0,
         'pure': 0,
         'name': "rameau"
-    };
+    }
     property var irrFr17e: {
         'offsets': [-8.0, -2.0, 3.0, 0.0, -3.0, -6.0, -9.0, -12.0, -15.0, -18.0, -21.0, -24.0],
         'root': 9,
         'pure': 3,
         'name': "irrFr17e"
-    };
+    }
     property var bachLehman: {
         'offsets': [0.0, -2.0, -3.9, -5.9, -7.8, -5.9, -3.9, -2.0, -2.0, -2.0, -2.0, 2.0],
         'root': 0,
         'pure': 3,
         'name': "bachLehman"
-    };
+    }
 
     property var currentTemperament: equal;
     property var currentRoot: 0;
@@ -1378,5 +1378,3 @@ MuseScore {
     }
 
 }
-
-// vim: ft=javascript
