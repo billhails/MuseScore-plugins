@@ -53,7 +53,7 @@ always pleasing, they are often surprisingly convincing musically, if the source
 
 ## Installation
 
-* Copy the pluging to your `MuseScore2/Plugins` directory
+* Copy the plugin to your `MuseScore2/Plugins` directory
 * start MuseScore
 * enable the plugin via `Plugins > Plugin Manager...`.
 

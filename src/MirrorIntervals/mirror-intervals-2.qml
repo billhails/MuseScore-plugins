@@ -22,7 +22,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.1
 
 MuseScore {
-    version: "1.0.0"
+    version: "2.3.2"
     menuPath: "Plugins.Composing Tools.Mirror Intervals"
     description: "Mirrors (inverts) intervals about a given pivot note"
     pluginType: "dialog"
@@ -248,4 +248,3 @@ MuseScore {
         visible: false
     }
 }
-// vim: ft=javascript
