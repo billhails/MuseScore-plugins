@@ -118,7 +118,16 @@ Undoes the last change. There is a hstory limit of 30.
 
 #### Redo
 
-Redoes a previous undo, where possible.
+Redo a previous undo, where possible.
+
+### Caveats
+
+The controls are applied strictly top to bottom and left to right.
+This means that making a change in any of the controls will override
+any changes below and to the right of that control, so for example
+if you manually edit the Pure Tone value then select a different
+Root Note your Pure Tone change will be lost. You can use the
+Undo button to revert that change however.
 
 ### Apply and Cancel
 
