@@ -1,6 +1,6 @@
 # Tuning
 
-I've written a plugin (tested with MuseScore 2.1.0) that others may find useful.
+I've written a plugin (tested with MuseScore 2.1.0 and 3.0.2) that others may find useful.
 
 I've been intrigued for a while by the tuning Bach purportedly used
 for his WTC according to Bradley Lehman [Website Here](http://www.larips.com)
@@ -43,7 +43,11 @@ third you reach when tuning in pure fifths (around 21.5 cents.)
 
 ## Installation
 
-* Copy the pluging to your `MuseScore2/Plugins` directory
+* Choose either the `2.x/tuning.qml` or `3.x/tuning.qml` file.
+* Click the "raw" button.
+* Or choose one of these links: [2.x](https://raw.githubusercontent.com/billhails/MuseScore-plugins/develop/src/Tuning/2.x/tuning.qml) or [3.x](https://raw.githubusercontent.com/billhails/MuseScore-plugins/develop/src/Tuning/3.x/tuning.qml).
+* In your browser do "Save as" and make sure there's no `.txt` extension.
+* Save the plugin to your `MuseScore2/Plugins` or `MuseScore3/Plugins` directory as appropriate.
 * start MuseScore
 * enable the plugin via `Plugins > Plugin Manager...`.
 
