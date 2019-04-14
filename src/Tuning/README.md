@@ -67,11 +67,12 @@ it:
 
 Allows you to choose a different root note to center the tuning on.
 This has the effect of rotating the tuning around the cycle of
-fifths. For example suppose in a particular tuning, the interval
-from C to G is a pure fifth while the interval G to D is slightly
-wide. If you select G as the root note, then the interval from G
-to D will be a pure fifth, and the interval from D to A will be
-slightly wide, and so on for all the other intervals.
+fifths. For example suppose in a particular tuning, with C as the
+root note, the interval from C to G is a pure fifth while the
+interval G to D is slightly wide. If you select G as the root note,
+then the interval from G to D will be a pure fifth, and the interval
+from D to A will be slightly wide, and so on for all the other
+intervals.
 
 This basically allows you to make certain tunings more usable in
 remote keys.
