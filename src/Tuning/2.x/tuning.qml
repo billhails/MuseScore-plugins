@@ -33,7 +33,6 @@ MuseScore {
     property var offsetTextWidth: 40;
     property var offsetLabelAlignment: 0x02 | 0x80;
 
-    // see command.js
     property var history: 0;
 
     // set true if customisations are made to the tuning
@@ -178,11 +177,12 @@ MuseScore {
         var selection = getSelection()
         if (selection === null) {
             error("No selection.\nThis plugin requires a current selection to run.\n")
-            Qt.quit()
+            return false
         } else {
             curScore.startCmd()
             mapOverSelection(selection, filterNotes, reTune(getFinalTuning()))
             curScore.endCmd()
+            return true
         }
     }
 
@@ -1164,11 +1164,12 @@ MuseScore {
                         id: applyButton
                         text: qsTranslate("PrefsDialogBase", "Apply")
                         onClicked: {
-                            applyTemperament()
-                            if (modified) {
-                                quitDialog.open()
-                            } else {
-                                Qt.quit()
+                            if (applyTemperament()) {
+                                if (modified) {
+                                    quitDialog.open()
+                                } else {
+                                    Qt.quit()
+                                }
                             }
                         }
                     }
@@ -1194,7 +1195,7 @@ MuseScore {
         title: "Error"
         text: ""
         onAccepted: {
-            Qt.quit()
+            errorDialog.close()
         }
     }
 
