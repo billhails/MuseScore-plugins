@@ -1,6 +1,6 @@
 # Tuning
 
-I've written a plugin (tested with MuseScore 2.1.0 and 3.0.2) that others may find useful.
+I've written a plugin (tested with MuseScore 2.1.0 and 3.0.5) that others may find useful.
 
 I've been intrigued for a while by the tuning Bach purportedly used
 for his WTC according to Bradley Lehman [Website Here](http://www.larips.com)
@@ -9,7 +9,7 @@ however I found a great resource on other tunings by Pierre Lewis
 [Here](http://leware.net/temper/temper.htm) and went ahead and added
 all of those too.
 
-![Tuning Pop Up](https://raw.githubusercontent.com/billhails/MuseScore-plugins/develop/images/Tuning.png)
+![Tuning Pop Up](https://raw.githubusercontent.com/billhails/MuseScore-plugins/master/images/Tuning.png)
 
 ## Tunings and Temperaments Supported
 
@@ -67,11 +67,12 @@ it:
 
 Allows you to choose a different root note to center the tuning on.
 This has the effect of rotating the tuning around the cycle of
-fifths. For example suppose in a particular tuning, the interval
-from C to G is a pure fifth while the interval G to D is slightly
-wide. If you select G as the root note, then the interval from G
-to D will be a pure fifth, and the interval from D to A will be
-slightly wide, and so on for all the other intervals.
+fifths. For example suppose in a particular tuning, with C as the
+root note, the interval from C to G is a pure fifth while the
+interval G to D is slightly wide. If you select G as the root note,
+then the interval from G to D will be a pure fifth, and the interval
+from D to A will be slightly wide, and so on for all the other
+intervals.
 
 This basically allows you to make certain tunings more usable in
 remote keys.

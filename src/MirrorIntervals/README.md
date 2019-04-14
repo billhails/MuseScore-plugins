@@ -2,6 +2,14 @@
 
 This plugin mirrors intervals chromatically about a chosen pivot note.
 
+## Compatibility
+
+MuseScore2, MuseScore3.
+
+## Screen Shot
+
+![Tuning Pop Up](https://raw.githubusercontent.com/billhails/MuseScore-plugins/master/images/MirrorIntervals.png)
+
 ## Behaviour
 
 The plugin requests a pivot note, then for each voice part in the selection:
@@ -53,7 +61,7 @@ always pleasing, they are often surprisingly convincing musically, if the source
 
 ## Installation
 
-* Copy the pluging to your `MuseScore2/Plugins` directory
+* Copy the appropriate plugin to your `MuseScore2/Plugins` or `MuseScore3/Plugins` directory
 * start MuseScore
 * enable the plugin via `Plugins > Plugin Manager...`.
 
