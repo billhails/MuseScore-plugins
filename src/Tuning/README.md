@@ -1,6 +1,6 @@
 # Tuning
 
-I've written a plugin (tested with MuseScore 2.1.0 and 3.0.2) that others may find useful.
+I've written a plugin (tested with MuseScore 2.1.0 and 3.0.5) that others may find useful.
 
 I've been intrigued for a while by the tuning Bach purportedly used
 for his WTC according to Bradley Lehman [Website Here](http://www.larips.com)
