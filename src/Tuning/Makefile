@@ -29,7 +29,7 @@ $(V2): $(TEMPLATE)
 	MuseScoreImport=1.0 MuseScoreVersion=2.3.2 Segment='segment' Namespace=Element FileIO=1.0 Width=510 bash $< > $@
 
 $(V3): $(TEMPLATE)
-	MuseScoreImport=3.0 MuseScoreVersion=3.0.2 Segment='segment' Namespace=Ms FileIO=3.0 Width=550 bash $< > $@
+	MuseScoreImport=3.0 MuseScoreVersion=3.0.5 Segment='segment' Namespace=Ms FileIO=3.0 Width=550 bash $< > $@
 
 $(V2) $(V3): Makefile
 
