@@ -796,7 +796,7 @@ MuseScore {
                         onClicked: { temperamentClicked(irrFr17e) }
                     }
                     RadioButton {
-                        id: bachlehman_button
+                        id: bachLehman_button
                         text: "Bach/Lehman"
                         exclusiveGroup: tempamentTypeGroup
                         onClicked: { temperamentClicked(bachLehman) }
