@@ -18,6 +18,10 @@ TEMPLATE=./tuning.sh
 V2=2.x/tuning.qml
 V3=3.x/tuning.qml
 
+# personal location, not relevant to others
+IV2=~/dropbox/Musescore2/Plugins/tuning.qml
+IV3=~/dropbox/Musescore3/Plugins/tuning.qml
+
 .PHONY: all
 
 all: $(V2) $(V3)
@@ -32,5 +36,16 @@ $(V3): $(TEMPLATE)
 	MuseScoreImport=3.0 MuseScoreVersion=3.0.5 Segment='segment' Namespace=Ms FileIO=3.0 Width=550 bash $< > $@
 
 $(V2) $(V3): Makefile
+
+.PHONY: install
+
+# this is just for my own convenience while developing
+install: $(IV2) $(IV3)
+
+$(IV2): $(V2)
+	cp $< $@
+
+$(IV3): $(V3)
+	cp $< $@
 
 # vim:noet sw=8

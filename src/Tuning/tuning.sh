@@ -178,6 +178,7 @@ MuseScore {
     property var currentTemperament: equal;
     property var currentRoot: 0;
     property var currentPureTone: 0;
+    property var currentTweak: 0.0;
 
     onRun: {
         if (!curScore) {
@@ -274,7 +275,7 @@ MuseScore {
 
     /**
      * map a note (pitch modulo 12) to a value in one of the above tables
-     * then adjust for the choice of pure note.
+     * then adjust for the choice of pure note and tweak.
      */
     function lookUp(note, table) {
         var i = ((note * 7) - currentRoot + 12) % 12;
@@ -282,11 +283,15 @@ MuseScore {
         var j = (currentPureTone - currentRoot + 12) % 12;
         var pureNoteAdjustment = table.offsets[j];
         var finalOffset = offset - pureNoteAdjustment;
-        return finalOffset
+        var tweakFinalOffset = finalOffset + parseFloat(tweakValue.text);
+        return tweakFinalOffset
     }
 
     /**
-     * subtract the equal tempered value from the current tuning value to get the tuning offset.
+     * returns a function for use by recalculate()
+     * 
+     * We use an abstract function here because recalculate can be passed
+     * a different function, i.e. when restoring from a save file.
      */
     function getTuning() {
         return function(pitch) {
@@ -587,6 +592,26 @@ MuseScore {
         )
     }
 
+    function setCurrentTweak(tweak) {
+        console.log("setCurrentTweak " + tweak)
+        var oldTweak = currentTweak
+        getHistory().add(
+            function () {
+                currentTweak = oldTweak
+                checkCurrentTweak()
+            },
+            function () {
+                currentTweak = tweak
+                checkCurrentTweak()
+            },
+            "current tweak"
+        )
+    }
+
+    function checkCurrentTweak() {
+        tweakValue.text = currentTweak.toFixed(1)
+    }
+
     function checkCurrentPureTone() {
         switch (currentPureTone) {
             case 0:
@@ -647,6 +672,7 @@ MuseScore {
         setCurrentTemperament(temperament)
         setCurrentRoot(currentTemperament.root)
         setCurrentPureTone(currentTemperament.pure)
+        setCurrentTweak(0.0)
         recalculate(getTuning())
         getHistory().end()
     }
@@ -656,6 +682,7 @@ MuseScore {
         setModified(true)
         setCurrentRoot(note)
         setCurrentPureTone(note)
+        setCurrentTweak(0.0)
         recalculate(getTuning())
         getHistory().end()
     }
@@ -664,6 +691,15 @@ MuseScore {
         getHistory().begin()
         setModified(true)
         setCurrentPureTone(note)
+        setCurrentTweak(0.0)
+        recalculate(getTuning())
+        getHistory().end()
+    }
+
+    function tweaked() {
+        getHistory().begin()
+        setModified(true)
+        setCurrentTweak(parseFloat(tweakValue.text))
         recalculate(getTuning())
         getHistory().end()
     }
@@ -680,7 +716,7 @@ MuseScore {
             function () {
                 textField.text = newText
             },
-            "edit text field"
+            "edit ".concat(textField.name)
         )
         getHistory().end()
         textField.previousText = newText
@@ -973,6 +1009,22 @@ MuseScore {
                         }
 
                         GroupBox {
+                            title: "Tweak"
+                            RowLayout {
+                                TextField {
+                                    Layout.maximumWidth: offsetTextWidth
+                                    id: tweakValue
+                                    text: "0.0"
+                                    readOnly: false
+                                    validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
+                                    property var previousText: "0.0"
+                                    property var name: "tweak"
+                                    onEditingFinished: { tweaked() }
+                                } 
+                            }
+                        }
+
+                        GroupBox {
                             title: "Final Offsets"
                             GridLayout {
                                 columns: 8
@@ -989,6 +1041,7 @@ MuseScore {
                                     readOnly: false
                                     validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
                                     property var previousText: "0.0"
+                                    property var name: "final C"
                                     onEditingFinished: { editingFinishedFor(final_c) }
                                 }
 
@@ -1003,6 +1056,7 @@ MuseScore {
                                     readOnly: false
                                     validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
                                     property var previousText: "0.0"
+                                    property var name: "final G"
                                     onEditingFinished: { editingFinishedFor(final_g) }
                                 }
 
@@ -1017,6 +1071,7 @@ MuseScore {
                                     readOnly: false
                                     validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
                                     property var previousText: "0.0"
+                                    property var name: "final D"
                                     onEditingFinished: { editingFinishedFor(final_d) }
                                 }
 
@@ -1031,6 +1086,7 @@ MuseScore {
                                     readOnly: false
                                     validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
                                     property var previousText: "0.0"
+                                    property var name: "final A"
                                     onEditingFinished: { editingFinishedFor(final_a) }
                                 }
 
@@ -1045,6 +1101,7 @@ MuseScore {
                                     readOnly: false
                                     validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
                                     property var previousText: "0.0"
+                                    property var name: "final E"
                                     onEditingFinished: { editingFinishedFor(final_e) }
                                 }
 
@@ -1059,6 +1116,7 @@ MuseScore {
                                     readOnly: false
                                     validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
                                     property var previousText: "0.0"
+                                    property var name: "final B"
                                     onEditingFinished: { editingFinishedFor(final_b) }
                                 }
 
@@ -1073,6 +1131,7 @@ MuseScore {
                                     readOnly: false
                                     validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
                                     property var previousText: "0.0"
+                                    property var name: "final F#"
                                     onEditingFinished: { editingFinishedFor(final_f_sharp) }
                                 }
 
@@ -1087,6 +1146,7 @@ MuseScore {
                                     readOnly: false
                                     validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
                                     property var previousText: "0.0"
+                                    property var name: "final C#"
                                     onEditingFinished: { editingFinishedFor(final_c_sharp) }
                                 }
 
@@ -1101,6 +1161,7 @@ MuseScore {
                                     readOnly: false
                                     validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
                                     property var previousText: "0.0"
+                                    property var name: "final G#"
                                     onEditingFinished: { editingFinishedFor(final_g_sharp) }
                                 }
 
@@ -1115,6 +1176,7 @@ MuseScore {
                                     readOnly: false
                                     validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
                                     property var previousText: "0.0"
+                                    property var name: "final Eb"
                                     onEditingFinished: { editingFinishedFor(final_e_flat) }
                                 }
 
@@ -1129,6 +1191,7 @@ MuseScore {
                                     readOnly: false
                                     validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
                                     property var previousText: "0.0"
+                                    property var name: "final Bb"
                                     onEditingFinished: { editingFinishedFor(final_b_flat) }
                                 }
 
@@ -1143,6 +1206,7 @@ MuseScore {
                                     readOnly: false
                                     validator: DoubleValidator { bottom: -99.9; decimals: 1; notation: DoubleValidator.StandardNotation; top: 99.9 }
                                     property var previousText: "0.0"
+                                    property var name: "final F"
                                     onEditingFinished: { editingFinishedFor(final_f) }
                                 }
                             }
@@ -1152,6 +1216,8 @@ MuseScore {
                                 id: saveButton
                                 text: qsTranslate("PrefsDialogBase", "Save")
                                 onClicked: {
+                                    // declaring this directly in the saveDialog's properties doesn't seem to work
+                                    saveDialog.folder = Qt.resolvedUrl("file://" + filePath)
                                     saveDialog.visible = true
                                 }
                             }
@@ -1159,6 +1225,7 @@ MuseScore {
                                 id: loadButton
                                 text: qsTranslate("PrefsDialogBase", "Load")
                                 onClicked: {
+                                    loadDialog.folder = Qt.resolvedUrl("file://" + filePath)
                                     loadDialog.visible = true
                                 }
                             }
@@ -1268,7 +1335,8 @@ MuseScore {
             ],
             temperament: currentTemperament.name,
             root: currentRoot,
-            pure: currentPureTone
+            pure: currentPureTone,
+            tweak: currentTweak
         };
         return(JSON.stringify(data))
     }
@@ -1279,6 +1347,12 @@ MuseScore {
         setCurrentTemperament(lookupTemperament(data.temperament))
         setCurrentRoot(data.root)
         setCurrentPureTone(data.pure)
+        // support older save files
+        if (data.hasOwnProperty('tweak')) {
+            setCurrentTweak(data.tweak)
+        } else {
+            setCurrentTweak(0.0)
+        }
         recalculate(
             function(pitch) {
                 return data.offsets[pitch % 12]
@@ -1305,7 +1379,7 @@ MuseScore {
 
     FileDialog {
         id: saveDialog
-        title: "Please choose a file"
+        title: "Please name a file"
         sidebarVisible: true
         selectExisting: false
         onAccepted: {

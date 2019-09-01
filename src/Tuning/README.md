@@ -32,7 +32,7 @@ third you reach when tuning in pure fifths (around 21.5 cents.)
 | Vallotti | Another irregular temperament. |
 | Werkmeister | Another, less symmetric irregular temperament. |
 | Marpurg | Three fifths tempered by 8 cents and evenly distributed. |
-| Just | "Just" intonation, An academic temperament. Near thirds and fifths are pure, at the expense of some intervals  being unusable. |
+| Just | "Just" intonation, An academic temperament. Near thirds and fifths are pure, at the expense of some intervals being unusable. |
 | Mean Semitone | Like Aaron, but the remaining comma is distributed between B-F# and Bb-F (15.75 cents each.) |
 | Grammateus | Hybrid Pythagorean tuning with the chromatic notes tempered. |
 | French | Temperament Ordinaire, first fifths tuned wide of a pure fifth, later fifths narrowed to compensate. |
@@ -83,7 +83,7 @@ a root note other than C.
 ### Pure Tone
 
 Adjusts each note by a constant amount so that the chosen pure tone
-is tuned to its "correct" equal tempered pitch, while maintaining
+is tuned to its "correct" equal tempered pitch (i.e. offset 0.0), while maintaining
 the relationships of the tuning. This is occasionally necessary to
 correctly reproduce a desired tuning exactly.
 
@@ -94,6 +94,11 @@ can subsequently adjust the Pure Tone separately if needed.
 Also note that certain preset tunings already have a pure tone
 other than C, to properly represent the correct tuning. Again
 you can override this choice if needed.
+
+### Tweak
+
+This just adds the specified value in cents to each of the final values.
+Useful if you require a particular non-zero offset for a particular note.
 
 ### Final Values
 
@@ -126,14 +131,15 @@ Redo a previous undo, where possible.
 The controls are applied strictly top to bottom and left to right.
 This means that making a change in any of the controls will override
 any changes below and to the right of that control, so for example
-if you manually edit the Pure Tone value then select a different
-Root Note your Pure Tone change will be lost. You can use the
+if you manually edit the Final Values then select a different
+Root Note your changes will be overridden. You can use the
 Undo button to revert that change however.
 
 ### Apply and Cancel
 
 If you have made customisations to a tuning, and you hit "Apply"
 or "Cancel", you will be asked to confirm that you want the plugin to
-quit. You would be quite annoyed if you spent time entering a set
+quit. You might be quite annoyed if you spent time entering a set
 of offsets manually, hit apply to try them out, and the plugin
-discarded them.
+applied them then vanished with no record of your work other than the
+score.
