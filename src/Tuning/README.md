@@ -11,7 +11,7 @@ however I found a great resource on other tunings by Pierre Lewis
 [Here](http://leware.net/temper/temper.htm) and went ahead and added
 all of those too.
 
-![Tuning Pop Up](https://raw.githubusercontent.com/billhails/MuseScore-plugins/master/images/Tuning.png)
+![Tuning Pop Up](https://raw.githubusercontent.com/billhails/MuseScore-plugins/develop/images/Tuning.png)
 
 ## Tunings and Temperaments Supported
 
