@@ -11,22 +11,24 @@ however I found a great resource on other tunings by Pierre Lewis
 [Here](http://leware.net/temper/temper.htm) and went ahead and added
 all of those too.
 
+## Screen Shot
+
 ![Tuning Pop Up](https://raw.githubusercontent.com/billhails/MuseScore-plugins/develop/images/Tuning.png)
 
 ## Tunings and Temperaments Supported
 
 Supported tunings with a brief description, see the Pierre Lewis
-page above for an explaination of the descriptions `:-)`.  But in
-brief, a cent is 1/100 of an equal-tempered semitone, a comma (or
-diatonic comma) is the difference between the C you started on and
-the B# you finish on when tuning in pure fiths (24 cents) and the
-syntonic comma is the difference between a pure third and the first
-third you reach when tuning in pure fifths (around 21.5 cents.)
+page linked above for an explaination of the descriptions `:-)`.
+But in brief, a cent is 1/100 of an equal-tempered semitone, a comma
+(or diatonic comma) is the difference between the C you started on
+and the B# you finish on when tuning in pure fiths (24 cents) and
+the syntonic comma is the difference between a pure third and the
+first third you reach when tuning in pure fifths (around 21.5 cents.)
 
 | Tuning | Description |
 | ------ | ----------- |
 | Equal | Each fifth is tempered 2 cents short of a pure fifth. equally distributing the comma. |
-| Pythagore | Untempered pure fifths, the entire 24-cent comma is between Eb and G#. |
+| Pythagorean | Untempered pure fifths, the entire 24-cent comma is between Eb and G#. |
 | Aaron | Each fifth is tempered 5.5 cents so that major thirds are pure, but resulting in a 36.5 cent "wolf" between Eb and G#. |
 | Silberman | Compromise tempering each fifth by 1/6 of a syntonic comma. Used by high Baroque organs. |
 | Salinas | A negative temperament. 1/3 comma makes the major thirds slightly narrow. |
@@ -34,7 +36,7 @@ third you reach when tuning in pure fifths (around 21.5 cents.)
 | Vallotti | Another irregular temperament. |
 | Werkmeister | Another, less symmetric irregular temperament. |
 | Marpurg | Three fifths tempered by 8 cents and evenly distributed. |
-| Just | "Just" intonation, An academic temperament. Near thirds and fifths are pure, at the expense of some intervals being unusable. |
+| Just | "Just" intonation, An academic temperament. Near thirds and fifths are pure, at the expense of some intervals being unusable. See [here](https://musescore.com/billhails/scores/5704148)|
 | Mean Semitone | Like Aaron, but the remaining comma is distributed between B-F# and Bb-F (15.75 cents each.) |
 | Grammateus | Hybrid Pythagorean tuning with the chromatic notes tempered. |
 | French | Temperament Ordinaire, first fifths tuned wide of a pure fifth, later fifths narrowed to compensate. |
@@ -55,10 +57,14 @@ third you reach when tuning in pure fifths (around 21.5 cents.)
 
 ## Basic Usage
 
-Select a passage, then invoke the plugin via `Plugins > Playback >
-Tuning`, select a tuning and apply. It changes the tuning offset
-for every selected note appropriately. To reset, select everything
-and apply the "equal" tuning (equal temperament.)
+If you select a passage of music, then only that passage wiil be
+affected, otherwise the entire score will be processed.  Invoke the
+plugin via `Plugins > Playback > Tuning`, select a tuning and apply.
+It changes the tuning offset for every selected note appropriately.
+
+To reset just hit Ctrl-Z (Cmd-Z on a Mac,) or if you're removing a
+tuning that was applied in a previous session, apply the "equal"
+tuning (equal temperament.)
 
 ## Advanced Usage
 
@@ -85,9 +91,9 @@ a root note other than C.
 ### Pure Tone
 
 Adjusts each note by a constant amount so that the chosen pure tone
-is tuned to its "correct" equal tempered pitch (i.e. offset 0.0), while maintaining
-the relationships of the tuning. This is occasionally necessary to
-correctly reproduce a desired tuning exactly.
+is tuned to its "correct" equal tempered pitch (i.e. offset 0.0),
+while maintaining the relationships of the tuning. This is occasionally
+necessary to correctly reproduce a desired tuning exactly.
 
 Note that when you change the Root Note above, the Pure Tone also
 changes to the same note. This is usually what you want, but you
@@ -99,8 +105,9 @@ you can override this choice if needed.
 
 ### Tweak
 
-This just adds the specified value in cents to each of the final values.
-Useful if you require a particular non-zero offset for a particular note.
+This just adds the specified value in cents to each of the final
+values.  Useful if you require a particular non-zero offset for a
+particular note.
 
 ### Final Values
 
@@ -130,12 +137,13 @@ Redo a previous undo, where possible.
 
 ### Caveats
 
-The controls are applied strictly top to bottom and left to right.
-This means that making a change in any of the controls will override
-any changes below and to the right of that control, so for example
-if you manually edit the Final Values then select a different
-Root Note your changes will be overridden. You can use the
-Undo button to revert that change however.
+With the exception of the "Annotate" checkbox, the controls are
+applied strictly top to bottom and left to right.  This means that
+making a change in any of the controls will override any changes
+below and to the right of that control, so for example if you
+manually edit the Final Values then select a different Root Note
+your changes to the Final Values will be overridden. You can use
+the Undo button to revert that change however.
 
 ### Apply and Cancel
 
@@ -145,3 +153,9 @@ quit. You might be quite annoyed if you spent time entering a set
 of offsets manually, hit apply to try them out, and the plugin
 applied them then vanished with no record of your work other than the
 score.
+
+### Annotate
+
+Annotates each note with the offset in cents that was applied. I wanted
+this, so you all get it `:-)`.
+

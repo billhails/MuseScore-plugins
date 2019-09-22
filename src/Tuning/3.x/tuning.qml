@@ -1,4 +1,4 @@
-// Apply a choice of tempraments and tunings to a selection
+// Apply a choice of tempraments and tunings.
 // Copyright (C) 2018-2019  Bill Hails
 //
 // This program is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@ import FileIO 3.0
 MuseScore {
     version: "3.0.5"
     menuPath: "Plugins.Playback.Tuning"
-    description: "Converts between tuning systems"
+    description: "Apply various temperaments and tunings"
     pluginType: "dialog"
     width: 550
     height: 500
@@ -175,34 +175,14 @@ MuseScore {
 
     function applyTemperament()
     {
-        var selection = getSelection()
-        if (selection === null) {
-            error("No selection.\nThis plugin requires a current selection to run.\n")
-            return false
-        } else {
-            curScore.startCmd()
-            mapOverSelection(selection, filterNotes, reTune(getFinalTuning()))
-            curScore.endCmd()
-            return true
+        var selection = new scoreSelection()
+        curScore.startCmd()
+        selection.map(filterNotes, reTune(getFinalTuning()))
+        if (annotateValue.checkedState == Qt.Checked) {
+            selection.map(filterNotes, annotate)
         }
-    }
-
-    function mapOverSelection(selection, filter, process) {
-        selection.cursor.rewind(1)
-        for (
-            var segment = selection.cursor.segment;
-                segment && segment.tick < selection.endTick;
-                segment = segment.next
-        ) {
-            for (var track = selection.startTrack; track < selection.endTrack; track++) {
-                var element = segment.elementAt(track)
-                if (element) {
-                    if (filter(element)) {
-                        process(element)
-                    }
-                }
-            }
-        }
+        curScore.endCmd()
+        return true
     }
 
     function filterNotes(element)
@@ -210,9 +190,25 @@ MuseScore {
         return element.type == Ms.CHORD
     }
 
-    function reTune(tuning)
+    function annotate(chord, cursor)
     {
-        return function(chord) {
+        for (var i = 0; i < chord.notes.length; i++) {
+            var note = chord.notes[i]
+            var text = newElement(Element.STAFF_TEXT);
+            text.text = '' + note.tuning
+            text.autoplace = true
+            text.fontSize = 7 // smaller
+            if (cursor.voice == 0 || cursor.voice == 2) {
+                text.placement = Placement.ABOVE
+            } else {
+                text.placement = Placement.BELOW
+            }
+            cursor.add(text)
+        }
+    }
+
+    function reTune(tuning) {
+        return function(chord, cursor) {
             for (var i = 0; i < chord.notes.length; i++) {
                 var note = chord.notes[i]
                 note.tuning = tuning(note.pitch)
@@ -220,31 +216,68 @@ MuseScore {
         }
     }
 
-    function getSelection() {
+    function scoreSelection() {
+        const SCORE_START = 0
+        const SELECTION_START = 1
+        const SELECTION_END = 2
+        var fullScore
+        var startStaff
+        var endStaff
+        var endTick
+        var inRange
+        var rewind
         var cursor = curScore.newCursor()
-        cursor.rewind(1)
-        if (!cursor.segment) {
-            return null
-        }
-        var selection = {
-            cursor: cursor,
-            startTick: cursor.tick,
-            endTick: null,
-            startStaff: cursor.staffIdx,
-            endStaff: null,
-            startTrack: null,
-            endTrack: null
-        }
-        cursor.rewind(2)
-        selection.endStaff = cursor.staffIdx + 1
-        if (cursor.tick == 0) {
-            selection.endTick = curScore.lastSegment.tick + 1
+        cursor.rewind(SELECTION_START)
+        if (cursor.segment) {
+            startStaff = cursor.staffIdx
+            cursor.rewind(SELECTION_END)
+            endStaff = cursor.staffIdx;
+            endTick = 0 // unused
+            if (cursor.tick === 0) {
+               endTick = curScore.lastSegment.tick + 1;
+            } else {
+               endTick = cursor.tick;
+            }
+            inRange = function() {
+                return cursor.segment && cursor.tick < endTick
+            }
+            rewind = function (voice, staff) {
+                // no idea why, but if there is a selection then
+                // we need to rewind the cursor *before* setting
+                // the voice and staff index.
+                cursor.rewind(SELECTION_START)
+                cursor.voice = voice
+                cursor.staffIdx = staff
+            }
         } else {
-            selection.endTick = cursor.tick
+            startStaff = 0
+            endStaff  = curScore.nstaves - 1
+            inRange = function () {
+                return cursor.segment
+            }
+            rewind = function (voice, staff) {
+                // no idea why, but if there's no selection then
+                // we need to rewind the cursor *after* setting
+                // the voice and staff index.
+                cursor.voice = voice
+                cursor.staffIdx = staff
+                cursor.rewind(SCORE_START)
+            }
         }
-        selection.startTrack = selection.startStaff * 4
-        selection.endTrack = selection.endStaff * 4
-        return selection
+
+        this.map = function(filter, process) {
+            for (var staff = startStaff; staff <= endStaff; staff++) {
+                for (var voice = 0; voice < 4; voice++) {
+                    rewind(voice, staff)
+                    while (inRange()) {
+                        if (cursor.element && filter(cursor.element)) {
+                            process(cursor.element, cursor)
+                        }
+                        cursor.next()
+                    }
+                }
+            }
+        }
     }
 
     function error(errorMessage) {
@@ -317,7 +350,6 @@ MuseScore {
     }
 
     function recalculate(tuning) {
-        console.log("recalculate")
         var old_final_c       = final_c.text
         var old_final_c_sharp = final_c_sharp.text
         var old_final_d       = final_d.text
@@ -388,7 +420,6 @@ MuseScore {
     }
 
     function setCurrentTemperament(temperament) {
-        console.log("setCurrentTemperament " + temperament.name)
         var oldTemperament = currentTemperament
         getHistory().add(
             function() {
@@ -499,7 +530,6 @@ MuseScore {
     }
 
     function setCurrentRoot(root) {
-        console.log("setCurrentRoot " + root)
         var oldRoot = currentRoot
         getHistory().add(
             function () {
@@ -556,7 +586,6 @@ MuseScore {
     }
 
     function setCurrentPureTone(pureTone) {
-        console.log("setCurrentPureTone " + pureTone)
         var oldPureTone = currentPureTone
         getHistory().add(
             function () {
@@ -572,7 +601,6 @@ MuseScore {
     }
 
     function setCurrentTweak(tweak) {
-        console.log("setCurrentTweak " + tweak)
         var oldTweak = currentTweak
         getHistory().add(
             function () {
@@ -633,7 +661,6 @@ MuseScore {
     }
 
     function setModified(state) {
-        console.log("setModified " + state)
         var oldModified = modified
         getHistory().add(
             function () {
@@ -1251,7 +1278,11 @@ MuseScore {
                             }
                         }
                     }
-
+                    CheckBox {
+                        id: annotateValue
+                        text: qsTr("Annotate")
+                        checked: false
+                    }
                 }
             }
         }
@@ -1292,7 +1323,6 @@ MuseScore {
 
     function getFile(dialog) {
         var source = dialog.fileUrl.toString().substring(7) // strip the 'file://' prefix
-        console.log("You chose: " + source)
         return source
     }
 
@@ -1321,7 +1351,6 @@ MuseScore {
     }
 
     function restoreSavedValues(data) {
-        console.log("restoreSavedValues")
         getHistory().begin()
         setCurrentTemperament(lookupTemperament(data.temperament))
         setCurrentRoot(data.root)
@@ -1397,7 +1426,6 @@ MuseScore {
 
         this.add = function(undo, redo, label) {
             var command = new Command(undo, redo, label)
-            console.log("history add command " + label)
             command.redo()
             if (transaction) {
                 history[index].push(command)
@@ -1408,14 +1436,11 @@ MuseScore {
 
         this.undo = function() {
             if (index != -1) {
-                console.log("history begin undo [" + index + "]")
                 history[index].slice().reverse().forEach(
                     function(command) {
-                        console.log("history undo " + command.label)
                         command.undo()
                     }
                 )
-                console.log("history end undo [" + index + "]")
                 index--
             }
         }
@@ -1423,14 +1448,11 @@ MuseScore {
         this.redo = function() {
             if ((index + 1) < history.length) {
                 index++
-                console.log("history begin redo [" + index + "]")
                 history[index].forEach(
                     function(command) {
-                        console.log("history redo " + command.label)
                         command.redo()
                     }
                 )
-                console.log("history end redo [" + index + "]")
             }
         }
 
@@ -1438,7 +1460,6 @@ MuseScore {
             if (transaction) {
                 throw new Error("already in transaction")
             }
-            console.log("history begin transaction [" + (index + 1) + "]")
             newHistory([])
             transaction = 1
         }
@@ -1447,9 +1468,8 @@ MuseScore {
             if (!transaction) {
                 throw new Error("not in transaction")
             }
-            console.log("history end transaction [" + index + "]")
             transaction = 0
         }
     }
-
 }
+// vim: ft=javascript
