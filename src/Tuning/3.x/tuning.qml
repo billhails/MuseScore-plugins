@@ -192,18 +192,24 @@ MuseScore {
 
     function annotate(chord, cursor)
     {
-        for (var i = 0; i < chord.notes.length; i++) {
-            var note = chord.notes[i]
+        function addText(noteIndex, placement) {
+            var note = chord.notes[noteIndex]
             var text = newElement(Element.STAFF_TEXT);
             text.text = '' + note.tuning
             text.autoplace = true
             text.fontSize = 7 // smaller
-            if (cursor.voice == 0 || cursor.voice == 2) {
-                text.placement = Placement.ABOVE
-            } else {
-                text.placement = Placement.BELOW
-            }
+            text.placement = placement
             cursor.add(text)
+        }
+
+        if (cursor.voice == 0 || cursor.voice == 2) {
+            for (var index = 0; index < chord.notes.length; index++) {
+                addText(index, Placement.ABOVE)
+            }
+        } else {
+            for (var index = chord.notes.length - 1; index >= 0; index--) {
+                addText(index, Placement.BELOW)
+            }
         }
     }
 
